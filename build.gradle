@@ -1,0 +1,122 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+// 全局变量 ext 定义
+// 子项目可访问 ext 全局变量
+
+ext {
+    // 定义是否要加密程序
+    encrypt = true
+//    encrypt = false
+}
+
+sourceCompatibility = 1.5
+version = '1.0.0'
+distributions {
+    main{
+        baseName = 'demo'
+    }
+}
+
+
+//mainClassName=""
+//mainClassName = "com.web1992.app.AppMain"
+//mainClassName = "com.web1992.launch.LaunchMain"
+
+//if(encrypt){
+//    project.mainClassName = "com.web1992.launch.LaunchMain"
+//}else{
+//    project.mainClassName = "com.web1992.app.AppMain"
+//}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+//println '---------------'
+//println project.buildDir
+//println project.name
+//println '---------------'
+
+task runMain << {
+
+    if (encrypt) {
+        println "true run"
+    } else {
+        println "false run"
+    }
+
+}
+
+task encryptJar <<{
+
+    println "encryptJar run"
+}
+
+if (encrypt) {
+    // 加密jar 文件
+    runMain.dependsOn encryptJar
+}
+
+// 正式发布
+task wwwRelease << {
+    project.mainClassName = "com.web1992.launch.LaunchMain"
+    println "wwwRelease"
+}
+
+// 测试发布
+task testRelease << {
+    project.mainClassName = "com.web1992.app.AppMain"
+    println "testRelease"
+//    println  project.zipTree()
+}
+
+//wwwRelease.dependsOn distZip,encryptJar,run
+//testRelease.dependsOn distZip,run
+
+//
+//if(encrypt){
+//    run.dependsOn wwwRelease
+//}else{
+//    run.dependsOn testRelease
+//}
+//
+
+
+// #######################################################
+
+// 正式 加密运行
+// gradle encryptJar wwwRelease run
+
+// 测试不加密运行
+// gradle testRelease run
+
+// #######################################################
+
+
+// #######################################################
+
+// 正式加密打包
+// gradle clean wwwRelease distZip encryptJar
+
+// 测试不加密打包
+// gradle clean testRelease distZip
+
+// #######################################################
+
+
+
+
+//FileTree tree = fileTree(dir: 'src/main')
+println project.buildDir
+println "---------"
+
+FileTree tree = fileTree(dir: project.buildDir)
+
+tree.each {File file ->
+    println file
+}
