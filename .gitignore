@@ -21,3 +21,4 @@ target
 bin/
 .DS_Store
 .gradle
+build

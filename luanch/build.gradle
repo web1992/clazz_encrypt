@@ -1,0 +1,13 @@
+
+
+dependencies {
+    compile project(':app')
+}
+
+
+
+task launch <<{
+    println "launch run ..."
+}
+
+

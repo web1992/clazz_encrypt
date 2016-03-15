@@ -1,12 +1,11 @@
-package com.web1992.clazz;
+package app.cn.web1992.clazz;
 
 /**
- * Created by erbao.wang on 2016/3/10.
+ * Created by erbao.wang on 2016/3/15.
  *
  * @desc
  */
 public class LaunchClazzLoafer extends ClassLoader {
-
     public LaunchClazzLoafer() {
     }
 

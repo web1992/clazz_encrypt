@@ -1,6 +1,7 @@
-package com.web1992.launch;
+package app.cn.web1992.launch;
 
-import com.web1992.clazz.LaunchClazzLoafer;
+
+import app.cn.web1992.clazz.LaunchClazzLoafer;
 
 import java.lang.reflect.Method;
 
