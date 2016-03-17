@@ -2,6 +2,7 @@ package app.cn.web1992.encrypt;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.WordUtils;
 import org.apache.commons.lang.math.NumberUtils;
 
 import java.io.File;
@@ -35,6 +36,7 @@ public class EncryptClazz {
         FileUtils.cleanDirectory(new File("build"));
         BigDecimal a=NumberUtils.createBigDecimal("2.30");
         println(a);
+
     }
 
     public static void println(Object obj){
