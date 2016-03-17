@@ -1,0 +1,20 @@
+apply plugin: 'application'
+
+mainClassName = project.launchMainClassName
+
+
+dependencies {
+    compile project(':app')
+}
+
+
+
+task launchRun << {
+    println "launch run ..."
+}
+
+
+launchRun.dependsOn clean,distZip
+
+
+//println project.launchMainClassName

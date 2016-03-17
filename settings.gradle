@@ -1,4 +1,4 @@
-includeFlat "launch", "app"
 rootProject.name = 'clazz_encrypt'
+include "launch", "app"
 
 

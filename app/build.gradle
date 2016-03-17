@@ -5,8 +5,8 @@
 
 
 
-task launch <<{
-    println "launch run ..."
+task appRun <<{
+    println "app run ..."
 }
 
 

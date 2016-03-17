@@ -1,7 +1,8 @@
-
-apply plugin: 'application'
-
-//mainClassName = " app.cn.web1992.launch.LaunchMain"
+// 全局变量 ext 定义
+// 子项目可访问 ext 全局变量
+ext {
+    launchMainClassName='app.cn.web1992.launch.LaunchMain'
+}
 
 allprojects{
     apply plugin: 'java'
@@ -23,41 +24,3 @@ subprojects{
 
 
 }
-
-
-
-dependencies {
-    compile project(':app')
-    compile project(':launch')
-}
-
-
-task encryptJar <<{
-
-    println "encryptJar run"
-}
-
-task forReleaseEnv << {
-    println "release run ..."
-}
-
-
-task forTestEnv << {
-    println "forTestEnv run ..."
-}
-
-gradle.taskGraph.whenReady {taskGraph ->
-    if (taskGraph.hasTask(forReleaseEnv)) {
-        version = '1.0.0'
-        mainClassName = "app.cn.web1992.launch.LaunchMain"
-    } else {
-        version = '1.0.0-SNAPSHOT'
-        mainClassName = "cn.web1992.Main"
-    }
-}
-
-
-
-forTestEnv.dependsOn clean,distZip
-
-forReleaseEnv.dependsOn clean,distZip,encryptJar

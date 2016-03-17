@@ -15,7 +15,7 @@ public class LaunchMain {
     public static void main(String[] args) throws Exception {
         ClassLoader clazzLoader = new LaunchClazzLoafer();
 
-        Class clazz = clazzLoader.loadClass("com.web1992.app.AppMain");
+        Class clazz = clazzLoader.loadClass("cn.web1992.Main");
 
         Method mainMethod= clazz.getMethod("main",new Class[]{String[].class});
 
