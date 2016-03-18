@@ -1,8 +1,9 @@
 package app.cn.web1992.encrypt;
 
+import org.apache.commons.collections.BagUtils;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.WordUtils;
 import org.apache.commons.lang.math.NumberUtils;
 
 import java.io.File;
@@ -36,11 +37,19 @@ public class EncryptClazz {
         FileUtils.cleanDirectory(new File("build"));
         BigDecimal a=NumberUtils.createBigDecimal("2.30");
         println(a);
+        String[] _arr=new String[]{"1","2","3"};
+        CollectionUtils.reverseArray(_arr);
+        for(String s:_arr){
+            print(s);
+        }
 
     }
 
     public static void println(Object obj){
         System.out.println(obj.toString());
+    }
+    public static void print(Object obj){
+        System.out.print(obj.toString());
     }
 
 }
