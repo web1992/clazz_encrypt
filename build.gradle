@@ -1,5 +1,3 @@
-// 全局变量 ext 定义
-// 子项目可访问 ext 全局变量
 ext {
     launchMainClassName='app.cn.web1992.launch.LaunchMain'
 }
@@ -15,6 +13,7 @@ allprojects{
         compile 'commons-io:commons-io:2.4'
         compile 'commons-logging:commons-logging:1.2'
         compile 'commons-lang:commons-lang:2.6'
+        compile 'org.apache.commons:commons-compress:1.9'
     }
 
     repositories {
