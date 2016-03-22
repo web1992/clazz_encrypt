@@ -1,8 +1,9 @@
 package app.cn.web1992.clazz;
 
-import org.apache.commons.io.FileUtils;
+import app.cn.web1992.encrypt.EncryptClazz;
 import org.apache.commons.lang.StringUtils;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,7 +20,7 @@ import java.util.zip.ZipFile;
  */
 public class LaunchClazzLoafer extends ClassLoader {
 
-    private  static int KEY=3;
+    private static final  int SIZE=1024;
     private static final  String CLAZZ=".clazz";
     private static final  String CLASS=".class";
     private String fileName;
@@ -44,18 +45,26 @@ public class LaunchClazzLoafer extends ClassLoader {
         }
         ZipFile zipFile=new ZipFile(file);
         Enumeration<?>  enumeration=zipFile.entries();
+        // 存在class 字节文件，
+        ByteArrayOutputStream bout = new ByteArrayOutputStream();
         while (enumeration.hasMoreElements()){
             ZipEntry zipEntry= (ZipEntry)enumeration.nextElement();
             if(zipEntry.isDirectory()){
                 continue;
             }
             String _name=zipEntry.getName();
-            if(_name.endsWith(CLASS)){
-//                println(_name);
+            if(_name.endsWith(CLAZZ)){
+                println(_name);
                 InputStream is = zipFile.getInputStream(zipEntry);
-                byte[] _b =loadClazzByte(is);
-
-                fileMap.put(_name,_b);
+                byte[] _b =new byte[SIZE];
+                // 把读取的文件放入到 byte 数组中
+                bout.reset();
+                int len=0;
+                while ((len=is.read(_b))!=-1){
+                    bout.write(_b,0,len);
+                }
+                String clazzName=parseFilName2ClazzName(_name);
+                fileMap.put(clazzName,bout.toByteArray());
             }
         }
     }
@@ -63,19 +72,14 @@ public class LaunchClazzLoafer extends ClassLoader {
 
     @Override
     protected Class<?> findClass(String name) throws ClassNotFoundException {
-        if(StringUtils.isBlank(name)){
-            StringUtils.isBlank(name);
-            return super.findClass(name);
-        }
-        if(!name.endsWith(CLAZZ)){
-            return super.findClass(name);
-        }
-
-        byte[] clazz=null;
+        byte[] clazzInMap=null;
         try {
-            clazz= this.fileMap.get(name);
-            String _name=parseFilName2ClazzName(name);
-            Class<?> c=  defineClass(_name,clazz,0,clazz.length);
+
+
+            clazzInMap= this.fileMap.get(name);
+            String _a=name.split(CLAZZ)[0];
+            byte[] cl= EncryptClazz.decipherByte(clazzInMap);
+            Class<?> c=  defineClass(_a,cl,0,cl.length);
             if(null == c){
                 throw new ClassNotFoundException(name);
             }
@@ -85,29 +89,6 @@ public class LaunchClazzLoafer extends ClassLoader {
         }
 
         return super.findClass(name);
-    }
-
-    private byte[] loadClazzByte(String filePath) throws IOException {
-        byte[] _byte=FileUtils.readFileToByteArray(new File(filePath));
-        int i=0;
-        for(byte _b:_byte){
-            _byte[i]=(byte)(_b-KEY);
-            i++;
-        }
-        return _byte;
-    }
-    private byte[] loadClazzByte(InputStream is) throws IOException {
-        int len=0;
-        // 需要根据文件的大小，动态的改变_tmp的大小，
-        // 如果_tmp的大小放不下数据，System.arraycopy 时，出现数组越界异常
-        byte[] _array=new byte[1024];
-        byte[] _tmp=new byte[1024];
-        int beginPos=0;
-        while ((len=is.read(_array))!=-1){
-            System.arraycopy(_array,0,_tmp,beginPos,len);
-            beginPos+=len+1;
-        }
-        return _tmp;
     }
 
     /**

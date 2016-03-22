@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         System.out.println("----------------");
         if (args.length > 0) {
-            System.out.println("main run with args " + args[0]);
+            System.out.println("main run with args new " + args[0]);
         } else {
             System.out.println("main run with out args ");
         }

@@ -1,16 +1,24 @@
-1,Ö´ĞĞmain·½·¨
+1,æ‰§è¡Œmainæ–¹æ³•
 -----------
     gradle run -q
-    »áÖ´ĞĞ launch ÏîÄ¿µÄMain ·½·¨
-    ×¢Òâ£ºÕâµÄ settings.gradle ±ØĞëÊ¹ÓÃ include ¶ø²»ÊÇ includeFlat
+    ä¼šæ‰§è¡Œ launch é¡¹ç›®çš„Main æ–¹æ³•
+    æ³¨æ„ï¼šè¿™çš„ settings.gradle å¿…é¡»ä½¿ç”¨ include è€Œä¸æ˜¯ includeFlat
 
-2,Ğ¡¼¼ÇÉ
+2,å°æŠ€å·§
 -----------
     gradle idea
     gradle eclipse
-Ê¹ÓÃidea ²å¼şÉú³ÉideaÏà¹ØµÄÎÄ¼ş£¬ÕâÑùÔÚ¾Í¿ÉÒÔÕÒµ½Ïà¹ØµÄ¹¤¾ßÀà
-    Èç StringUtils.isBlank("") ÒıÓÃapache.commons.lang ¹¤¾ßÀà
+ä½¿ç”¨idea æ’ä»¶ç”Ÿæˆideaç›¸å…³çš„æ–‡ä»¶ï¼Œè¿™æ ·åœ¨å°±å¯ä»¥æ‰¾åˆ°ç›¸å…³çš„å·¥å…·ç±»
+    å¦‚ StringUtils.isBlank("") å¼•ç”¨apache.commons.lang å·¥å…·ç±»
     
-3,ÆäËû
+3,å…¶ä»–
 -----------
-    http://commons.apache.org/ ¹¤¾ßÀà×Ü½á
+    http://commons.apache.org/ å·¥å…·ç±»æ€»ç»“
+
+
+4,jni 
+---------
+    linux ç¼–è¯‘
+    http://www.cnblogs.com/mandroid/archive/2011/06/15/2081093.html
+    
+    g++  -I/usr/local/java/include -I/usr/local/java/include/linux  -o libHello.so -g -shared -fPIC  jni_helloworldImpl.cpp 
